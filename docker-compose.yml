@@ -1,0 +1,26 @@
+version: "3"
+   
+services:
+  postgres:
+    image: postgres
+    container_name: db
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+  
+  blogapp:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    container_name: blogapp
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - postgres
+  
+  redis:
+    image: "redis:alpine"

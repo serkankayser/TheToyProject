@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Edited Articles</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Gwendolyn&family=Indie+Flower&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main_style.css' %}">
+</head>
+
+<body>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="/">Dashboard</a>
+            <a href="/article-create">Create Article</a>
+            <a href="/article-approval">Approval Article</a>
+            <a href="/articles-edited">Edited Articles</a>
+        </div>
+        
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+        
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
+    <div class="allpage">
+        <div class="header">
+            <h1>Article List (Edited)</h1>
+        </div>
+        <div class="content">
+            {% block content %}
+            <table class="article_list">
+                <tr>
+                    <th>Article Id</th>
+                    <th>Article Title</th>
+                    <th>Article Content</th>
+                    <th>Status</th>
+                    <th>Edited By</th>
+                    
+                </tr>
+                {% for article in data %}
+                <tr>
+                    <td>{{ article.0 }}</td>
+                    <td>{{ article.1|slice:":20" }}</td>
+                    <td>{{ article.2|slice:":20" }}</td>
+                    <td>{{ article.3 }}</td>
+                    <td>{{ article.4 }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endblock %}
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -5,9 +5,9 @@ build:
 	docker-compose up --build
 up:
 	docker-compose up
-# ssh:
-# 	ERROR: connection refused error.
-# 	ssh root@`docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' blogapp`
+ssh:
+	# For Ubuntu: sudo apt install sshpass
+	sshpass -p "root" ssh root@`docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' blogapp`
 server:
 	docker exec -ti blogapp bash -c "python manage.py runserver 0.0.0.0:8001"
 down:

@@ -21,8 +21,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - postgres
+      - redisapp
   
-  redis:
+  redisapp:
     image: "redis:alpine"
-    depends_on:
-      - blogapp

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Article, User
 from django.db.models import Q
-from .forms import ArticleEditForm, ArticleCreateForm
+from .forms import ArticleEditForm, ArticleCreateForm, FeedbackForm
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 import datetime
@@ -10,6 +10,17 @@ from rest_framework.decorators import permission_classes
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.views.generic.edit import FormView
+
+
+class FeedbackView(FormView):
+    template_name = 'contact.html'
+    form_class = FeedbackForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.send_email()
+        return super(FeedbackView, self).form_valid(form)
 
 
 @api_view(['GET'])

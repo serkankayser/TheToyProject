@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
 from blog_app import views
 
 urlpatterns = [
@@ -23,5 +24,6 @@ urlpatterns = [
     path('article-create', views.article_create, name='article-create'),
     path('article-approval', views.article_approval, name='article-approval'),
     path('articles-edited', views.article_edited, name='/articles-edited'),
+    url(r'^feedback/$', views.FeedbackView.as_view(), name="feedback"),
     path('admin/', admin.site.urls),
 ]

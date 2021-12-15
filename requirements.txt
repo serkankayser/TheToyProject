@@ -4,5 +4,5 @@ djangorestframework
 markdown
 django-filter
 coverage==3.6
-celery
+celery==4.4.2
 redis
